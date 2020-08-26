@@ -67,8 +67,10 @@ public class Add_Contacts extends Fragment {
                if(name.getText().toString()!=null&&phnno.getText().toString()!=null&&imagefile!=null)
                {
                    databaseHelper.addData(new User(name.getText().toString(),phnno.getText().toString(),imagefile));
-
-
+                   ((MainActivity)getActivity()).updatedata(Contacts.recyclerView);
+                   imageView.setImageResource(R.drawable.addphoto);
+                   phnno.setText(null);
+                   name.setText(null);
 
                }
                else {
@@ -102,7 +104,5 @@ public class Add_Contacts extends Fragment {
         }
 
     }
-    interface RefreshInterface{
-        public void refreshAdapterFragmentB();
-    }
+
 }

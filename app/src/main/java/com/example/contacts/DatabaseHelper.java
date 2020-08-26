@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,12 +18,12 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     Context  context;
-    private static String DATABASE_NAME="contactsdb.db";
+    private static String DATABASE_NAME="contactsdbnew.db";
     private static int DATABASE_VERSION=1;
     private ByteArrayOutputStream byteArrayOutputStream;
     private byte[] bytes;
 
-    private String createTable="CREATE TABLE User(username VARCHAR,userphnno VARCHAR,userImg BLOB)";
+    private String createTable="CREATE TABLE User(id INTEGER PRIMARY KEY,username VARCHAR,userphnno VARCHAR,userImg BLOB)";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -78,13 +79,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<User>users=new ArrayList<>();
 
         Cursor c=sqLiteDatabase.rawQuery("SELECT * FROM User",null);
-        Toast.makeText(context, String.valueOf(c.getCount()), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, String.valueOf(c.getCount()), Toast.LENGTH_SHORT).show();
         if (c.getCount()!=0)
         {
             //int i=0;
             while (c.moveToNext()){
 
                // Toast.makeText(context, "hello"+i, Toast.LENGTH_SHORT).show();
+                int id=c.getInt(c.getColumnIndex("id"));
+                Log.i("ID",String.valueOf(id));
                 String name=c.getString(c.getColumnIndex("username"));
                 String phnno=c.getString(c.getColumnIndex("userphnno"));
                 byte[]bytes=c.getBlob(c.getColumnIndex("userImg"));
@@ -103,5 +106,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     return null;
+    }
+    public void updateData(int Id,User user){
+        SQLiteDatabase sqLiteDatabase=this.getWritableDatabase();
+
+        ContentValues contentValues=new ContentValues();
+        contentValues.put("username",user.getUsername());
+        contentValues.put("userphnno",user.getUserphnno());
+        Bitmap image=user.getUserImg();
+        byteArrayOutputStream=new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG,50,byteArrayOutputStream);
+        bytes=byteArrayOutputStream.toByteArray();
+        contentValues.put("userImg",bytes);
+        sqLiteDatabase.update("User",contentValues,"id=?", new String[]{String.valueOf(Id)});
     }
 }

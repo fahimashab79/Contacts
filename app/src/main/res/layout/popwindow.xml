@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/popwindow"
+
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:background="@drawable/dialogbackground"
+    app:cardCornerRadius="50dp"
+
+
+    android:layout_height="match_parent">
+
+        <LinearLayout
+            android:background="@android:color/darker_gray"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:id="@+id/circularimgpop"
+                 android:layout_marginTop="20dp"
+                app:civ_border_color="#000000"
+                app:civ_border_width="2dp"
+                app:civ_shadow="true"
+                app:civ_shadow_radius="1dp"
+                app:civ_shadow_color="#3f51b5"
+                >
+
+
+
+            </com.mikhaellopez.circularimageview.CircularImageView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fahim Ashab"
+                android:id="@+id/popname"
+                android:textSize="30dp"
+
+                android:textColor="@android:color/background_dark"
+                android:layout_marginVertical="5dp"
+                >
+
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+880 1521322861"
+                android:id="@+id/popnumber"
+                android:textSize="30dp"
+
+                android:textColor="@android:color/background_dark"
+                android:layout_marginVertical="10dp"
+                >
+
+            </TextView>
+            <LinearLayout
+                android:layout_marginVertical="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:gravity="center"
+                android:layout_marginHorizontal="40dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/imageviewcall"
+                    android:background="@drawable/call"
+                    android:layout_marginHorizontal="40dp">
+
+                </ImageView>
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/imageviewmessage"
+                    android:background="@drawable/edit"
+                    android:layout_marginHorizontal="40dp">
+
+                </ImageView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
